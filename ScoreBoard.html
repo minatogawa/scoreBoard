@@ -1,0 +1,39 @@
+<body>
+	{{> table}}
+	{{> featuredChoice}}
+</body>
+
+<template name="table">
+	<form action="">
+		<input type="text" placeholder="Type a choice" name="newChoice">
+		<input type="text" placeholder="Type an indicator" indicator="newIndicator">
+		<input type="text" placeholder="Type a goal" goal="newGoal">
+		<input type="submit" value="Go!">
+	</form>
+	<table border="1">
+		<tr>
+			<th colspan="4">Proposta de Valor</th>
+		</tr>
+		<tr>
+			<th>Escolha</th>
+			<th>Indicador</th>
+			<th>Meta</th>
+			<th>Atual</th>
+		</tr>
+		<tr></tr>
+		{{# each performanceRow}}
+		<tr>
+			<td class="choiceId {{selectedChoice}}">{{name}}</td>
+			<td class="choiceId {{selectedChoice}}">{{indicator}}</td>
+			<td class="choiceId {{selectedChoice}}">{{goal}}</td>
+			<td class="choiceId {{selectedChoice}}"></td>
+		</tr>
+		{{/each}}
+	</table>
+</template>
+
+<template name="featuredChoice">
+	{{#if clickedChoice}}
+		<button class="deleteChoice btn btn-danger"> delete {{clickedChoice.name}}? </button>
+	{{/if}}
+</template>
