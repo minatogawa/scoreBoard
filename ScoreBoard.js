@@ -19,10 +19,14 @@ if (Meteor.isClient){
 			$('[goal=newGoal]').val('');
 
 			// Call method 'getAnalyticsData' from server and logs in browser console
-			Meteor.call('getAnalyticsData', function(error, result) {
+			// beware: passing the argument newIndicator, which should be a valid one,
+			// 'ga:views' for example
+			Meteor.call('getAnalyticsData', newIndicator, function(error, result) {
 				if (error) console.log(error);
-
+				console.log('Toda a resposta fornecida:');
 				console.log(result);
+				console.log('Propriedade totalsForAllResults:')
+				console.log(result.totalsForAllResults);
 			});
 		},
 		'click .choiceId':function(){
@@ -73,6 +77,7 @@ if (Meteor.isServer){
 		null
 	);
 
+	// Methods
 	Meteor.methods({
 		// Method to get ganalytics data of the profile id
 		// Defaults to ga:visits metric, but that can be changed simply passing a
@@ -91,7 +96,7 @@ if (Meteor.isServer){
 		        'ids': 'ga:127900436',
 		        'start-date': 'yesterday',
 		        'end-date': 'today',
-		        'metrics': 'ga:visits'
+		        'metrics': metrics
 		    }, function(err, result) {
 		        if (err) f.throw(err);
 
