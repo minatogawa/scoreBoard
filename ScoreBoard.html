@@ -1,6 +1,8 @@
 <body>
 	{{> table}}
 	{{> featuredChoice}}
+
+
 </body>
 
 <template name="table">
@@ -14,6 +16,7 @@
 		<tr>
 			<th colspan="4">Proposta de Valor</th>
 		</tr>
+
 		<tr>
 			<th>Escolha</th>
 			<th>Indicador</th>
@@ -26,7 +29,7 @@
 			<td class="choiceId {{selectedChoice}}">{{name}}</td>
 			<td class="choiceId {{selectedChoice}}">{{indicator}}</td>
 			<td class="choiceId {{selectedChoice}}">{{goal}}</td>
-			<td class="choiceId {{selectedChoice}}"></td>
+			<td class="choiceId {{selectedChoice}}">{{current}}</td>
 		</tr>
 		{{/each}}
 	</table>

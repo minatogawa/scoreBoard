@@ -37,6 +37,8 @@ livedata@1.0.18
 logging@1.1.15
 meteor@1.2.17
 meteor-base@1.0.4
+meteorhacks:async@1.0.0
+meteorhacks:npm@1.5.0
 minifier-css@1.2.14
 minifier-js@1.2.14
 minimongo@1.0.17
@@ -46,6 +48,7 @@ modules@0.7.6
 modules-runtime@0.7.6
 mongo@1.1.11
 mongo-id@1.0.5
+npm-container@1.2.0
 npm-mongo@1.5.46
 observe-sequence@1.0.12
 ordered-dict@1.0.8
