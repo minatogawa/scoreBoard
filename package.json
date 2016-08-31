@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "fibers": "^1.0.13",
-    "googleapis": "^12.3.0",
+    "googleapis": "^12.4.0",
     "meteor-node-stubs": "^0.2.3"
   }
 }
