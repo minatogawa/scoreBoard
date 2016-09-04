@@ -1,3 +1,20 @@
+SyncedCron.options.collectionName = 'cronjobs';
+
+SyncedCron.add({
+    name: 'analytics data',
+    schedule: function(parser) {
+        return parser.text('every 1 minute'); // parser is a later.parse object
+    },
+    job: function() {
+        Meteor.call('getAnalyticsData');
+    }
+});
+
+Meteor.startup(function() {
+    // Start jobs
+    SyncedCron.start();
+});
+
 var googleapis = require('googleapis');
 var JWT = googleapis.auth.JWT;
 var analytics = googleapis.analytics('v3');
@@ -20,7 +37,7 @@ Meteor.methods({
 	// Meteor.call('getAnalyticsData', 'ga:pageviews');
 	//
 	// how2get profile Id: https://gist.github.com/searls/83d5126be6a096294f35
-	getAnalyticsData: function(metrics = 'ga:visits') {
+	getAnalyticsData: function(metrics = 'ga:exitRate') {
 		var f = new Future();
 		authClient.authorize(function(err, tokens) {
 	    if (err) f.throw(err);
