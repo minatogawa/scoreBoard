@@ -1,18 +1,19 @@
-SyncedCron.options.collectionName = 'cronjobs';
+// Not using this package for updating the analytics data
+// SyncedCron.options.collectionName = 'cronjobs';
 
-SyncedCron.add({
-    name: 'analytics data',
-    schedule: function(parser) {
-        return parser.text('every 1 minute'); // parser is a later.parse object
-    },
-    job: function() {
-        Meteor.call('getAnalyticsData');
-    }
-});
+// SyncedCron.add({
+//     name: 'analytics data',
+//     schedule: function(parser) {
+//         return parser.text('every 1 minute'); // parser is a later.parse object
+//     },
+//     job: function() {
+//     	
+//     }
+// // });
 
 Meteor.startup(function() {
     // Start jobs
-    SyncedCron.start();
+    // SyncedCron.start();
 });
 
 var googleapis = require('googleapis');
@@ -37,7 +38,7 @@ Meteor.methods({
 	// Meteor.call('getAnalyticsData', 'ga:pageviews');
 	//
 	// how2get profile Id: https://gist.github.com/searls/83d5126be6a096294f35
-	getAnalyticsData: function(metrics = 'ga:exitRate') {
+	getAnalyticsData: function(metrics = 'ga:users') {
 		var f = new Future();
 		authClient.authorize(function(err, tokens) {
 	    if (err) f.throw(err);
@@ -52,28 +53,16 @@ Meteor.methods({
 
 	        if (err) f.throw(err);
 	        console.log(result);
+
+
 	        
 	        return f.return(result);
 
-
-	        //the _.each approach haven't worked properly.
-	        // _.each(result.data.items, function(item){
-	        // 	var analytics = {
-	        // 		total: item.totalsForAllResults,
-	        // 		profileId: item.profileInfo.profileId,
-	        // 	};
-		       //  self.added('choices', Random.id(), analytics);
-
-		       //  console.log("@@@@@@@@@@@@@@@@@@@");
-		       //  console.log(analytics.total);
-		       //  console.log("@@@@@@@@@@@@@@@@@@@");
-	        // });
-
-	        // self.ready();
 	    });
 		});
 		return f.wait();
 	},
+
 	// Method not being used: Needs credentials authentication which can't be
 	// done with a simple GET
 	// getAnalyticsDataManual: function() {

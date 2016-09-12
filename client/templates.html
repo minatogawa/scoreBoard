@@ -1,15 +1,9 @@
 <body>
 	{{> table}}
 	{{> featuredChoice}}
-	{{> c3 someTemplate}}
+
 
 </body>
-
-<template name="someTemplate">
-
-	{{> c3 myChartData}}
-
-</template>
 
 <template name="table">
 	<form action="">
@@ -44,5 +38,6 @@
 <template name="featuredChoice">
 	{{#if clickedChoice}}
 		<button class="deleteChoice btn btn-danger"> delete {{clickedChoice.name}}? </button>
+		<button class="updateChoiceData"> update {{clickedChoice.name}}</button>
 	{{/if}}
 </template>
