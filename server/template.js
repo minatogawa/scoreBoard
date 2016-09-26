@@ -81,10 +81,6 @@ var analyticsData = Meteor.wrapAsync(function(metrics, callback) {
     	totals.push(totalResult);
     	dates.push(date.xCoordVal);
     });
-    console.log('AYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
-    console.log(totals);
-    console.log(dates);
-
     finalResult = {
     	'dates': dates, // x coordinate on chart
     	'totals': totals, // y coordinate on chart
@@ -104,10 +100,13 @@ var analyticsGetDataRange = Meteor.wrapAsync(function(metrics, date, callback) {
 	  'metrics': metrics
 	}, function(err, result) {
 	    if (err) callback(err, null);
-	    console.log(result);
-	    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-	    console.log(date['start-date']);
-	    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+        // debug
+        // console.log('------------------------------------------');
+	    // console.log(result);
+        // console.log('------------------------------------------');
+	    // console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+	    // console.log(date['start-date']);
+	    // console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	    callback(null, result.totalsForAllResults[metrics]);
 	});
 });
