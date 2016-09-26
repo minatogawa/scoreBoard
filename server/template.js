@@ -14,6 +14,7 @@
 Meteor.startup(function() {
     // Start jobs
     // SyncedCron.start();
+    	 
 });
 
 var googleapis = require('googleapis');
@@ -29,6 +30,7 @@ var authClient = new JWT(
 	null
 );
 
+
 // Methods
 Meteor.methods({
 	// Method to get ganalytics data of the profile id
@@ -39,28 +41,47 @@ Meteor.methods({
 	//
 	// how2get profile Id: https://gist.github.com/searls/83d5126be6a096294f35
 	getAnalyticsData: function(metrics = 'ga:users') {
-		var f = new Future();
+		
 		authClient.authorize(function(err, tokens) {
-	    if (err) f.throw(err);
+			var f = new Future();
+		    if (err) f.throw(err);
+	        var dateRanges =
+	        [
+		        {
+					'start-date': '2016-08-23',
+	        		'end-date': '2016-08-30',
+		        },
+		        {
+		        	'start-date': '2016-09-01',
+	        		'end-date': '2016-09-08',
+		        }
+	        ];
 
-	    analytics.data.ga.get({
-	        auth: authClient,
-	        'ids': 'ga:127900436',
-	        'start-date': '2016-08-01',
-	        'end-date': 'today',
-	        'metrics': metrics
-	    }, function(err, result) {
+	        allRows = [];
 
-	        if (err) f.throw(err);
-	        console.log(result);
-
-
-	        
-	        return f.return(result);
-
-	    });
-		});
-		return f.wait();
+	        _.each(dateRanges, function(date, index) {
+			    analytics.data.ga.get({
+			        auth: authClient,
+			        'ids': 'ga:127900436',
+			        'start-date': date['start-date'],
+			        'end-date': date['end-date'],
+			        'metrics': metrics
+			    }, function(err, result) {
+				        if (err) f.throw(err);				        
+				        //console.log(result);
+				        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+				        console.log(date['start-date']);
+				        //console.log(result);
+				        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+				        allRows.push(result.rows);
+				        if (index == allRows.length - 1)
+				        	return f.return(allRows);
+	    		});
+	        });
+	        return f.wait();
+	        console.log('aaaaaaaaaaaaaaaa');
+	        //return f.return(allRows);
+		});			
 	},
 
 	// Method not being used: Needs credentials authentication which can't be

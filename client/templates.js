@@ -28,8 +28,9 @@ Template.table.events({
 			console.log('Toda a resposta fornecida:');
 			console.log(result);
 			console.log('Propriedade totalsForAllResults:')
-			console.log(result.totalsForAllResults);
-			console.log(result.profileInfo.profileId);
+			// console.log(result.totalsForAllResults);
+			// console.log(result.profileInfo.profileId);
+			// console.log(result.rows);
 		});
 	},
 	

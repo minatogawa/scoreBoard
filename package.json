@@ -5,8 +5,9 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "fibers": "^1.0.13",
+    "fibers": "^1.0.14",
     "googleapis": "^12.4.0",
+    "insight": "^0.8.3",
     "meteor-node-stubs": "^0.2.3"
   }
 }
